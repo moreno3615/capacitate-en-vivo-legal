@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Privacidad — Capacítate en Vivo</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+
+<style>
+  :root{
+    --paper:#f3f4f3;
+    --panel:#ffffff;
+    --ink:#101d2c;
+    --ink-soft:#3c4a5c;
+    --muted:#66748a;
+    --line:#d7dbe0;
+    --navy:#0f2b48;
+    --navy-deep:#0a1c30;
+    --gold:#9a7327;
+    --gold-soft:#c9a55c;
+    --gold-tint:#f4ecda;
+    --focus:#1c5fa8;
+    --shadow: 0 1px 2px rgba(16,29,44,.06), 0 8px 24px -12px rgba(16,29,44,.18);
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#0d1620;
+      --panel:#121d2b;
+      --ink:#eef1f5;
+      --ink-soft:#c3ccd8;
+      --muted:#8b98ab;
+      --line:#243347;
+      --navy:#9fc4ec;
+      --navy-deep:#dbe9fa;
+      --gold:#d9b568;
+      --gold-soft:#e7cd8e;
+      --gold-tint:#20231c;
+      --focus:#7fb2e8;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 32px -14px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0d1620;
+    --panel:#121d2b;
+    --ink:#eef1f5;
+    --ink-soft:#c3ccd8;
+    --muted:#8b98ab;
+    --line:#243347;
+    --navy:#9fc4ec;
+    --navy-deep:#dbe9fa;
+    --gold:#d9b568;
+    --gold-soft:#e7cd8e;
+    --gold-tint:#20231c;
+    --focus:#7fb2e8;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 32px -14px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box;}
+  ::selection{ background:var(--gold-tint); color:var(--navy-deep); }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink-soft);
+    font-family:"Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+    font-size:16px;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:var(--focus); text-decoration-thickness: 1.5px; text-underline-offset: 2px; }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--focus); outline-offset:3px; border-radius:2px; }
+
+  h1,h2,h3{
+    font-family:"Source Serif 4", Georgia, serif;
+    color:var(--ink);
+    text-wrap:balance;
+    font-weight:700;
+    margin:0;
+  }
+
+  .mono{
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+    letter-spacing:.03em;
+  }
+
+  /* ---------- Letterhead ---------- */
+  .letterhead{
+    background:
+      radial-gradient(1200px 480px at 12% -20%, rgba(154,115,39,.16), transparent 60%),
+      linear-gradient(180deg, var(--navy-deep), var(--navy) 130%);
+    color:#eef2f7;
+    padding: 3.4rem 1.5rem 3rem;
+  }
+  .letterhead-inner{
+    max-width:52rem;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:1.4rem;
+  }
+  .seal{
+    width:3.1rem; height:3.1rem;
+    border-radius:50%;
+    border:1.5px solid var(--gold-soft);
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Source Serif 4", serif;
+    font-weight:700;
+    font-size:1.05rem;
+    color:var(--gold-soft);
+    flex:none;
+    background: rgba(255,255,255,.03);
+  }
+  .letterhead-top{ display:flex; align-items:center; gap:.9rem; }
+  .brand{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:.78rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--gold-soft);
+  }
+  .letterhead h1{
+    color:#fff;
+    font-size:clamp(1.9rem, 4.4vw, 2.7rem);
+    line-height:1.15;
+  }
+  .doc-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.5rem 1.6rem;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:.78rem;
+    color:#c9d3e0;
+  }
+  .doc-meta span b{ color:#fff; font-weight:500; }
+
+  /* ---------- Layout ---------- */
+  .page{
+    max-width:52rem;
+    margin:0 auto;
+    padding: 3rem 1.5rem 6rem;
+    display:grid;
+    grid-template-columns: 12.5rem minmax(0,1fr);
+    gap: 3rem;
+    align-items:start;
+  }
+  @media (max-width: 46rem){
+    .page{ grid-template-columns: 1fr; }
+  }
+
+  nav.toc{
+    position:sticky;
+    top:1.5rem;
+    display:flex;
+    flex-direction:column;
+    gap:.15rem;
+    padding-right:.5rem;
+  }
+  @media (max-width: 46rem){
+    nav.toc{ position:static; flex-direction:row; flex-wrap:wrap; gap:.4rem 1rem; padding-bottom:1rem; border-bottom:1px solid var(--line); }
+  }
+  .toc-label{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:.7rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:.6rem;
+  }
+  @media (max-width: 46rem){ .toc-label{ width:100%; margin-bottom:.2rem; } }
+  nav.toc a{
+    color:var(--ink-soft);
+    text-decoration:none;
+    font-size:.86rem;
+    padding:.3rem 0;
+    border-left:2px solid transparent;
+    padding-left:.7rem;
+    margin-left:-.7rem;
+  }
+  @media (max-width: 46rem){ nav.toc a{ border-left:none; margin-left:0; padding-left:0; border-bottom:2px solid transparent; } }
+  nav.toc a:hover{ color:var(--navy); border-left-color:var(--gold-soft); }
+  @media (max-width: 46rem){ nav.toc a:hover{ border-bottom-color:var(--gold-soft); } }
+
+  main{ min-width:0; }
+
+  .intro{
+    color:var(--ink-soft);
+    font-size:1.05rem;
+    max-width:42rem;
+    margin-bottom:2.6rem;
+    padding-bottom:2.2rem;
+    border-bottom:1px solid var(--line);
+  }
+  .intro strong{ color:var(--ink); }
+
+  section.clause{
+    padding: 2.1rem 0;
+    border-bottom:1px solid var(--line);
+    scroll-margin-top:1.5rem;
+  }
+  section.clause:last-of-type{ border-bottom:none; }
+
+  .clause-head{
+    display:flex;
+    align-items:baseline;
+    gap:.85rem;
+    margin-bottom:.9rem;
+  }
+  .clause-num{
+    font-family:"IBM Plex Mono", monospace;
+    color:var(--gold);
+    font-size:.95rem;
+    flex:none;
+  }
+  .clause h2{ font-size:1.32rem; }
+
+  section.clause p, section.clause li{
+    max-width:42rem;
+    color:var(--ink-soft);
+  }
+  section.clause p + p{ margin-top:.9rem; }
+  section.clause ul, section.clause ol{
+    padding-left:1.2rem;
+    margin:.9rem 0 0;
+    max-width:42rem;
+  }
+  section.clause li + li{ margin-top:.5rem; }
+
+  /* data table */
+  .data-table{
+    margin-top:1.2rem;
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+    background:var(--panel);
+    box-shadow:var(--shadow);
+  }
+  .data-row{
+    display:grid;
+    grid-template-columns: 11rem 1fr;
+    gap:1rem;
+    padding:.85rem 1.1rem;
+  }
+  .data-row + .data-row{ border-top:1px solid var(--line); }
+  .data-row dt{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:.74rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .data-row dd{ margin:0; color:var(--ink-soft); font-size:.94rem; }
+  dl.data-table{ margin-top:1.2rem; }
+
+  /* rights grid */
+  .rights-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(13.5rem, 1fr));
+    gap:.85rem;
+    margin-top:1.3rem;
+    max-width:44rem;
+  }
+  .right-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:1rem 1.1rem;
+    box-shadow:var(--shadow);
+  }
+  .right-card .letter{
+    font-family:"Source Serif 4", serif;
+    font-weight:700;
+    color:var(--gold);
+    font-size:1.05rem;
+    display:block;
+    margin-bottom:.35rem;
+  }
+  .right-card p{ margin:0; font-size:.9rem; color:var(--ink-soft); }
+
+  .callout{
+    margin-top:1.2rem;
+    border-left:3px solid var(--gold-soft);
+    background: color-mix(in srgb, var(--gold-tint) 60%, var(--panel));
+    padding:.95rem 1.15rem;
+    border-radius:0 8px 8px 0;
+    font-size:.92rem;
+    max-width:42rem;
+  }
+  .callout p{ margin:0; }
+
+  .contact-card{
+    margin-top:1.2rem;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:1.3rem 1.4rem;
+    box-shadow:var(--shadow);
+    max-width:30rem;
+  }
+  .contact-card dt{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:.72rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-top:.9rem;
+  }
+  .contact-card dt:first-child{ margin-top:0; }
+  .contact-card dd{ margin:.2rem 0 0; font-size:1rem; color:var(--ink); font-weight:500; }
+
+  footer.colophon{
+    max-width:52rem;
+    margin:0 auto;
+    padding: 0 1.5rem 4rem;
+    color:var(--muted);
+    font-size:.82rem;
+    display:flex;
+    justify-content:space-between;
+    gap:1rem;
+    flex-wrap:wrap;
+  }
+
+  @media (prefers-reduced-motion: no-preference){
+    section.clause{ animation:none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="letterhead">
+  <div class="letterhead-inner">
+    <div class="letterhead-top">
+      <div class="seal">CV</div>
+      <div class="brand">Capacítate en Vivo</div>
+    </div>
+    <h1>Política de Privacidad</h1>
+    <div class="doc-meta">
+      <span>Versión <b>1.0</b></span>
+      <span>Vigente desde <b>27 de agosto de 2026</b></span>
+      <span>Responsable <b>Miguel Angel Moreno Lopez</b></span>
+    </div>
+  </div>
+</header>
+
+<div class="page">
+  <nav class="toc" aria-label="Contenido">
+    <div class="toc-label">Contenido</div>
+    <a href="#responsable">1. Responsable</a>
+    <a href="#datos">2. Datos que tratamos</a>
+    <a href="#finalidad">3. Para qué los usamos</a>
+    <a href="#base-legal">4. Base legal</a>
+    <a href="#seguridad">5. Cómo los protegemos</a>
+    <a href="#terceros">6. Con quién se comparten</a>
+    <a href="#conservacion">7. Cuánto tiempo se conservan</a>
+    <a href="#derechos">8. Tus derechos</a>
+    <a href="#menores">9. Menores de edad</a>
+    <a href="#cambios">10. Cambios a esta política</a>
+    <a href="#contacto">11. Contacto</a>
+  </nav>
+
+  <main>
+    <p class="intro">
+      <strong>Capacítate en Vivo</strong> es una aplicación de capacitación y certificación para
+      empresas de vigilancia y seguridad privada. Esta política explica, en términos claros, qué
+      información recopilamos de quienes usan la aplicación, para qué la usamos y qué derechos
+      tienes sobre ella.
+    </p>
+
+    <section class="clause" id="responsable">
+      <div class="clause-head"><span class="clause-num">01</span><h2>Responsable del tratamiento</h2></div>
+      <p>
+        <strong>Miguel Angel Moreno Lopez</strong>, desarrollador de la aplicación Capacítate en Vivo,
+        con domicilio en Medellín, Colombia, es responsable del tratamiento de los datos personales
+        recopilados a través de la aplicación, en los términos de la Ley 1581 de 2012 y el
+        Decreto 1377 de 2013 de Colombia.
+      </p>
+      <p>
+        Cuando una empresa contrata el uso de Capacítate en Vivo para capacitar a su personal, esa
+        empresa actúa como responsable de los datos de sus propios empleados dentro de la
+        plataforma (por ejemplo, para decidir qué cursos asigna o qué reportes consulta), mientras
+        que el desarrollador actúa como encargado técnico de la infraestructura que aloja esos datos.
+      </p>
+    </section>
+
+    <section class="clause" id="datos">
+      <div class="clause-head"><span class="clause-num">02</span><h2>Datos que tratamos</h2></div>
+      <p>Recopilamos únicamente los datos necesarios para operar la plataforma de capacitación:</p>
+      <dl class="data-table">
+        <div class="data-row">
+          <dt>Identificación</dt>
+          <dd>Nombre completo, número de documento de identidad, teléfono y correo electrónico.</dd>
+        </div>
+        <div class="data-row">
+          <dt>Cuenta</dt>
+          <dd>Correo y contraseña de acceso. La contraseña es gestionada de forma cifrada por nuestro
+            proveedor de autenticación (Supabase) y en ningún momento queda almacenada en texto plano
+            ni es visible para nosotros.</dd>
+        </div>
+        <div class="data-row">
+          <dt>Perfil laboral</dt>
+          <dd>Empresa y sede a la que perteneces, y tu rol dentro de la plataforma (por ejemplo,
+            Vigilante, Supervisor, Instructor o Administrador).</dd>
+        </div>
+        <div class="data-row">
+          <dt>Contenido que subes</dt>
+          <dd>Foto de perfil y firma digital, cuando decides agregarlas — la firma se usa para
+            expedir tus certificados de capacitación en PDF.</dd>
+        </div>
+        <div class="data-row">
+          <dt>Actividad formativa</dt>
+          <dd>Cursos tomados, asistencia a clases, resultados de exámenes y certificados obtenidos.</dd>
+        </div>
+        <div class="data-row">
+          <dt>Uso de la plataforma</dt>
+          <dd>Registros de inicio y cierre de sesión, usados por tu empresa para reportes internos
+            de tiempo de conexión.</dd>
+        </div>
+      </dl>
+      <p>No solicitamos acceso a tu ubicación, contactos ni cámara, y la aplicación no contiene
+        publicidad ni rastreadores de terceros con fines comerciales.</p>
+    </section>
+
+    <section class="clause" id="finalidad">
+      <div class="clause-head"><span class="clause-num">03</span><h2>Para qué los usamos</h2></div>
+      <ul>
+        <li>Crear y administrar tu cuenta, y verificar tu identidad al iniciar sesión.</li>
+        <li>Asignarte cursos, clases y exámenes correspondientes a tu empresa y tu rol.</li>
+        <li>Registrar tu asistencia y tus resultados, y expedir certificados a tu nombre.</li>
+        <li>Generar reportes internos para la empresa a la que perteneces (por ejemplo, estadísticas
+          de cumplimiento de capacitación o tiempos de conexión de su personal).</li>
+        <li>Enviarte notificaciones dentro de la aplicación sobre clases, exámenes o cursos nuevos.</li>
+        <li>Mantener la seguridad de la plataforma y prevenir accesos no autorizados.</li>
+      </ul>
+    </section>
+
+    <section class="clause" id="base-legal">
+      <div class="clause-head"><span class="clause-num">04</span><h2>Base legal</h2></div>
+      <p>
+        Tratamos tus datos con base en la autorización que otorgas al crear tu cuenta o al ser
+        registrado por tu empresa, y en la necesidad de ejecutar el servicio de capacitación que
+        la aplicación presta. Puedes revocar esta autorización en cualquier momento, sujeto a las
+        obligaciones legales de conservación de registros de capacitación que puedan aplicar a tu
+        empleador.
+      </p>
+    </section>
+
+    <section class="clause" id="seguridad">
+      <div class="clause-head"><span class="clause-num">05</span><h2>Cómo los protegemos</h2></div>
+      <p>
+        Los datos se almacenan en la infraestructura de <strong>Supabase</strong>, un proveedor de
+        backend que cifra la información en tránsito (HTTPS) y aplica reglas de acceso a nivel de
+        fila (Row Level Security): cada usuario solo puede consultar los datos de su propia empresa
+        y, dentro de ella, únicamente lo que corresponde a su rol. Ningún usuario puede leer datos
+        de empresas distintas a la suya.
+      </p>
+      <div class="callout">
+        <p>Las contraseñas nunca se guardan en texto plano: las gestiona directamente el sistema de
+          autenticación de Supabase mediante cifrado, sin que la aplicación ni sus administradores
+          puedan verlas.</p>
+      </div>
+    </section>
+
+    <section class="clause" id="terceros">
+      <div class="clause-head"><span class="clause-num">06</span><h2>Con quién se comparten</h2></div>
+      <p>
+        No vendemos tus datos ni los compartimos con fines publicitarios. Los datos se comparten
+        únicamente con:
+      </p>
+      <ul>
+        <li><strong>Supabase Inc.</strong>, como proveedor de infraestructura (base de datos,
+          autenticación y almacenamiento de archivos), actuando como encargado del tratamiento.</li>
+        <li><strong>Tu empresa empleadora</strong>, que puede consultar tus datos de capacitación,
+          asistencia y resultados dentro de la plataforma, en su calidad de responsable de la
+          gestión de su propio personal.</li>
+        <li>Autoridades competentes, únicamente cuando exista un requerimiento legal válido.</li>
+      </ul>
+    </section>
+
+    <section class="clause" id="conservacion">
+      <div class="clause-head"><span class="clause-num">07</span><h2>Cuánto tiempo se conservan</h2></div>
+      <p>
+        Conservamos tus datos mientras tu cuenta permanezca activa y, después de darla de baja,
+        durante el tiempo que la empresa deba conservar constancias de capacitación por obligaciones
+        legales o contractuales propias de su actividad (por ejemplo, certificaciones de personal
+        de vigilancia). Puedes solicitar la eliminación anticipada de tus datos personales por los
+        medios descritos en la sección de contacto, sin perjuicio de la información que deba
+        conservarse por ley.
+      </p>
+    </section>
+
+    <section class="clause" id="derechos">
+      <div class="clause-head"><span class="clause-num">08</span><h2>Tus derechos</h2></div>
+      <p>Como titular de tus datos, y de acuerdo con la Ley 1581 de 2012 (Habeas Data), tienes derecho a:</p>
+      <div class="rights-grid">
+        <div class="right-card"><span class="letter">Conocer</span><p>Saber qué datos tuyos tenemos y cómo se han usado.</p></div>
+        <div class="right-card"><span class="letter">Actualizar</span><p>Corregir datos inexactos, incompletos o desactualizados.</p></div>
+        <div class="right-card"><span class="letter">Suprimir</span><p>Solicitar la eliminación de tus datos cuando ya no sea necesario conservarlos.</p></div>
+        <div class="right-card"><span class="letter">Revocar</span><p>Retirar la autorización otorgada para el tratamiento de tus datos.</p></div>
+        <div class="right-card"><span class="letter">Reclamar</span><p>Presentar quejas ante la Superintendencia de Industria y Comercio de Colombia.</p></div>
+        <div class="right-card"><span class="letter">Acceder</span><p>Solicitar copia de tus datos de forma gratuita, al menos una vez al mes.</p></div>
+      </div>
+    </section>
+
+    <section class="clause" id="menores">
+      <div class="clause-head"><span class="clause-num">09</span><h2>Menores de edad</h2></div>
+      <p>
+        Capacítate en Vivo está dirigida a personal adulto de empresas de vigilancia y seguridad
+        privada. No está diseñada para ser usada por menores de edad y no recopilamos
+        conscientemente datos de menores de 18 años.
+      </p>
+    </section>
+
+    <section class="clause" id="cambios">
+      <div class="clause-head"><span class="clause-num">10</span><h2>Cambios a esta política</h2></div>
+      <p>
+        Podemos actualizar esta política cuando cambien las funciones de la aplicación o la
+        normativa aplicable. La fecha de la última actualización siempre aparece en el
+        encabezado de este documento. Si el cambio es sustancial, lo anunciaremos dentro de la
+        aplicación.
+      </p>
+    </section>
+
+    <section class="clause" id="contacto">
+      <div class="clause-head"><span class="clause-num">11</span><h2>Contacto</h2></div>
+      <p>
+        Para ejercer tus derechos o resolver cualquier duda sobre el tratamiento de tus datos,
+        escríbenos:
+      </p>
+      <dl class="contact-card">
+        <dt>Correo de contacto</dt>
+        <dd>morenolopez863@gmail.com</dd>
+        <dt>Responsable</dt>
+        <dd>Miguel Angel Moreno Lopez</dd>
+        <dt>Aplicación</dt>
+        <dd>Capacítate en Vivo</dd>
+      </dl>
+    </section>
+  </main>
+</div>
+
+<footer class="colophon">
+  <span>Capacítate en Vivo — Política de Privacidad</span>
+  <span class="mono">v1.0 · 27/08/2026</span>
+</footer>
+
+</body>
+</html>
