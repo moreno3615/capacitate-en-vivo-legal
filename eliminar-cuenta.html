@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eliminación de Cuenta y Datos — Capacítate en Vivo</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+
+<style>
+  :root{
+    --paper:#f3f4f3;
+    --panel:#ffffff;
+    --ink:#101d2c;
+    --ink-soft:#3c4a5c;
+    --muted:#66748a;
+    --line:#d7dbe0;
+    --navy:#0f2b48;
+    --navy-deep:#0a1c30;
+    --gold:#9a7327;
+    --gold-soft:#c9a55c;
+    --gold-tint:#f4ecda;
+    --focus:#1c5fa8;
+    --shadow: 0 1px 2px rgba(16,29,44,.06), 0 8px 24px -12px rgba(16,29,44,.18);
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#0d1620;
+      --panel:#121d2b;
+      --ink:#eef1f5;
+      --ink-soft:#c3ccd8;
+      --muted:#8b98ab;
+      --line:#243347;
+      --navy:#9fc4ec;
+      --navy-deep:#dbe9fa;
+      --gold:#d9b568;
+      --gold-soft:#e7cd8e;
+      --gold-tint:#20231c;
+      --focus:#7fb2e8;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 32px -14px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0d1620;
+    --panel:#121d2b;
+    --ink:#eef1f5;
+    --ink-soft:#c3ccd8;
+    --muted:#8b98ab;
+    --line:#243347;
+    --navy:#9fc4ec;
+    --navy-deep:#dbe9fa;
+    --gold:#d9b568;
+    --gold-soft:#e7cd8e;
+    --gold-tint:#20231c;
+    --focus:#7fb2e8;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 32px -14px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box;}
+  ::selection{ background:var(--gold-tint); color:var(--navy-deep); }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink-soft);
+    font-family:"Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+    font-size:16px;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:var(--focus); text-decoration-thickness: 1.5px; text-underline-offset: 2px; }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--focus); outline-offset:3px; border-radius:2px; }
+
+  h1,h2,h3{
+    font-family:"Source Serif 4", Georgia, serif;
+    color:var(--ink);
+    text-wrap:balance;
+    font-weight:700;
+    margin:0;
+  }
+
+  .mono{
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+    letter-spacing:.03em;
+  }
+
+  /* ---------- Letterhead ---------- */
+  .letterhead{
+    background:
+      radial-gradient(1200px 480px at 12% -20%, rgba(154,115,39,.16), transparent 60%),
+      linear-gradient(180deg, var(--navy-deep), var(--navy) 130%);
+    color:#eef2f7;
+    padding: 3.4rem 1.5rem 3rem;
+  }
+  .letterhead-inner{
+    max-width:52rem;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:1.4rem;
+  }
+  .seal{
+    width:3.1rem; height:3.1rem;
+    border-radius:50%;
+    border:1.5px solid var(--gold-soft);
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Source Serif 4", serif;
+    font-weight:700;
+    font-size:1.05rem;
+    color:var(--gold-soft);
+    flex:none;
+    background: rgba(255,255,255,.03);
+  }
+  .letterhead-top{ display:flex; align-items:center; gap:.9rem; }
+  .brand{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:.78rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--gold-soft);
+  }
+  .letterhead h1{
+    color:#fff;
+    font-size:clamp(1.9rem, 4.4vw, 2.7rem);
+    line-height:1.15;
+  }
+  .doc-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.5rem 1.6rem;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:.78rem;
+    color:#c9d3e0;
+  }
+  .doc-meta span b{ color:#fff; font-weight:500; }
+
+  /* ---------- Layout ---------- */
+  .page{
+    max-width:52rem;
+    margin:0 auto;
+    padding: 3rem 1.5rem 6rem;
+    display:grid;
+    grid-template-columns: 12.5rem minmax(0,1fr);
+    gap: 3rem;
+    align-items:start;
+  }
+  @media (max-width: 46rem){
+    .page{ grid-template-columns: 1fr; }
+  }
+
+  nav.toc{
+    position:sticky;
+    top:1.5rem;
+    display:flex;
+    flex-direction:column;
+    gap:.15rem;
+    padding-right:.5rem;
+  }
+  @media (max-width: 46rem){
+    nav.toc{ position:static; flex-direction:row; flex-wrap:wrap; gap:.4rem 1rem; padding-bottom:1rem; border-bottom:1px solid var(--line); }
+  }
+  .toc-label{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:.7rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:.6rem;
+  }
+  @media (max-width: 46rem){ .toc-label{ width:100%; margin-bottom:.2rem; } }
+  nav.toc a{
+    color:var(--ink-soft);
+    text-decoration:none;
+    font-size:.86rem;
+    padding:.3rem 0;
+    border-left:2px solid transparent;
+    padding-left:.7rem;
+    margin-left:-.7rem;
+  }
+  @media (max-width: 46rem){ nav.toc a{ border-left:none; margin-left:0; padding-left:0; border-bottom:2px solid transparent; } }
+  nav.toc a:hover{ color:var(--navy); border-left-color:var(--gold-soft); }
+  @media (max-width: 46rem){ nav.toc a:hover{ border-bottom-color:var(--gold-soft); } }
+
+  main{ min-width:0; }
+
+  .intro{
+    color:var(--ink-soft);
+    font-size:1.05rem;
+    max-width:42rem;
+    margin-bottom:2.6rem;
+    padding-bottom:2.2rem;
+    border-bottom:1px solid var(--line);
+  }
+  .intro strong{ color:var(--ink); }
+
+  section.clause{
+    padding: 2.1rem 0;
+    border-bottom:1px solid var(--line);
+    scroll-margin-top:1.5rem;
+  }
+  section.clause:last-of-type{ border-bottom:none; }
+
+  .clause-head{
+    display:flex;
+    align-items:baseline;
+    gap:.85rem;
+    margin-bottom:.9rem;
+  }
+  .clause-num{
+    font-family:"IBM Plex Mono", monospace;
+    color:var(--gold);
+    font-size:.95rem;
+    flex:none;
+  }
+  .clause h2{ font-size:1.32rem; }
+
+  section.clause p, section.clause li{
+    max-width:42rem;
+    color:var(--ink-soft);
+  }
+  section.clause p + p{ margin-top:.9rem; }
+  section.clause ul, section.clause ol{
+    padding-left:1.2rem;
+    margin:.9rem 0 0;
+    max-width:42rem;
+  }
+  section.clause li + li{ margin-top:.5rem; }
+
+  .callout{
+    margin-top:1.2rem;
+    border-left:3px solid var(--gold-soft);
+    background: color-mix(in srgb, var(--gold-tint) 60%, var(--panel));
+    padding:.95rem 1.15rem;
+    border-radius:0 8px 8px 0;
+    font-size:.92rem;
+    max-width:42rem;
+  }
+  .callout p{ margin:0; }
+
+  .contact-card{
+    margin-top:1.2rem;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:1.3rem 1.4rem;
+    box-shadow:var(--shadow);
+    max-width:30rem;
+  }
+  .contact-card dt{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:.72rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-top:.9rem;
+  }
+  .contact-card dt:first-child{ margin-top:0; }
+  .contact-card dd{ margin:.2rem 0 0; font-size:1rem; color:var(--ink); font-weight:500; }
+
+  footer.colophon{
+    max-width:52rem;
+    margin:0 auto;
+    padding: 0 1.5rem 4rem;
+    color:var(--muted);
+    font-size:.82rem;
+    display:flex;
+    justify-content:space-between;
+    gap:1rem;
+    flex-wrap:wrap;
+  }
+</style>
+</head>
+<body>
+
+<header class="letterhead">
+  <div class="letterhead-inner">
+    <div class="letterhead-top">
+      <div class="seal">CV</div>
+      <div class="brand">Capacítate en Vivo</div>
+    </div>
+    <h1>Eliminación de Cuenta y Datos</h1>
+    <div class="doc-meta">
+      <span>Versión <b>1.0</b></span>
+      <span>Vigente desde <b>21 de septiembre de 2026</b></span>
+      <span>Responsable <b>Miguel Angel Moreno Lopez</b></span>
+    </div>
+  </div>
+</header>
+
+<div class="page">
+  <nav class="toc" aria-label="Contenido">
+    <div class="toc-label">Contenido</div>
+    <a href="#solicitud">1. Cómo solicitar la eliminación</a>
+    <a href="#eliminados">2. Datos que se eliminarán</a>
+    <a href="#conservados">3. Datos que podríamos conservar</a>
+    <a href="#contacto">4. Contacto</a>
+  </nav>
+
+  <main>
+    <p class="intro">
+      Si deseas eliminar tu cuenta de <strong>Capacítate en Vivo</strong> y los datos asociados
+      a ella, sigue los pasos descritos en este documento.
+    </p>
+
+    <section class="clause" id="solicitud">
+      <div class="clause-head"><span class="clause-num">01</span><h2>Cómo solicitar la eliminación</h2></div>
+      <p>
+        Envía un correo electrónico a <a href="mailto:morenolopez863@gmail.com">morenolopez863@gmail.com</a>
+        con el asunto <strong>"Solicitud de eliminación de cuenta"</strong>, indicando:
+      </p>
+      <ul>
+        <li>Tu nombre completo registrado en la app</li>
+        <li>El correo electrónico con el que creaste tu cuenta</li>
+        <li>El motivo de la solicitud (opcional)</li>
+      </ul>
+      <div class="callout">
+        <p>Procesaremos tu solicitud en un plazo máximo de 15 días hábiles.</p>
+      </div>
+    </section>
+
+    <section class="clause" id="eliminados">
+      <div class="clause-head"><span class="clause-num">02</span><h2>Datos que se eliminarán</h2></div>
+      <p>Al procesar tu solicitud, se eliminará de forma permanente:</p>
+      <ul>
+        <li>Nombre completo</li>
+        <li>Correo electrónico</li>
+        <li>Número de teléfono</li>
+        <li>Ubicación registrada</li>
+        <li>Fotografías (documento de identidad, foto de perfil)</li>
+        <li>Historial de cursos y certificaciones asociadas a tu cuenta</li>
+      </ul>
+    </section>
+
+    <section class="clause" id="conservados">
+      <div class="clause-head"><span class="clause-num">03</span><h2>Datos que podríamos conservar</h2></div>
+      <p>
+        Por obligaciones legales o normativas del sector de seguridad privada en Colombia, es
+        posible que conservemos temporalmente ciertos registros de certificación (constancias
+        de capacitación) durante el periodo exigido por la ley, incluso después de eliminar tu
+        cuenta. Estos registros no incluyen tus datos de contacto ni información biométrica, y
+        no se seguirán utilizando para ningún otro fin.
+      </p>
+    </section>
+
+    <section class="clause" id="contacto">
+      <div class="clause-head"><span class="clause-num">04</span><h2>Contacto</h2></div>
+      <p>Para cualquier pregunta sobre este proceso, escríbenos:</p>
+      <dl class="contact-card">
+        <dt>Correo de contacto</dt>
+        <dd>morenolopez863@gmail.com</dd>
+        <dt>Responsable</dt>
+        <dd>Miguel Angel Moreno Lopez</dd>
+        <dt>Aplicación</dt>
+        <dd>Capacítate en Vivo</dd>
+      </dl>
+    </section>
+  </main>
+</div>
+
+<footer class="colophon">
+  <span>Capacítate en Vivo — Eliminación de Cuenta y Datos</span>
+  <span class="mono">v1.0 · 21/09/2026</span>
+</footer>
+
+</body>
+</html>
